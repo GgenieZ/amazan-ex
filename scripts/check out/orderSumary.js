@@ -3,6 +3,7 @@ import {products,getproduct} from "../../data/products.js" ;
 import{formatCurrency} from "../utils/money.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
 import {deliveryOptions,getDeliveryOption} from "../../data/deliveryOption.js"
+import { renderPaymentSummary } from "./paymentSumary.js";
 
 export function renderOrderSummary(){
     let cartSummaryHTML='';
@@ -45,7 +46,7 @@ export function renderOrderSummary(){
             <span>
                 Quantity: <span class="quantity-label">${cartItem.quantity}</span>
             </span>
-            <span class="update-quantity-link link-primary">
+            <span class="update-quantity-link link-primary js-update-link" data-product-id="${matchinProduct.id}">
                 Update
             </span>
             <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchinProduct.id}">
@@ -71,6 +72,7 @@ export function renderOrderSummary(){
             removeFromCart(productId)
             const container=document.querySelector(`.js-cart-container-${productId}`)
             container.remove();
+            renderPaymentSummary();
         })
     })
 
@@ -121,10 +123,9 @@ export function renderOrderSummary(){
     {
         element.addEventListener('click',()=>{
             const{productId,deliveryOptionId} =element.dataset;
-            console.log(productId)
-            console.log(deliveryOptionId)
-            updateDeliveryOption(productId,deliveryOptionId)
+updateDeliveryOption(productId,deliveryOptionId)
             renderOrderSummary();
+            renderPaymentSummary();
         })
     })
 }
