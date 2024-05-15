@@ -1,4 +1,4 @@
-import {cart,removeFromCart,updateDeliveryOption} from "../../data/cart.js";
+import {cart,removeFromCart,updateDeliveryOption,updateCartQuantity} from "../../data/cart.js";
 import {products,getproduct} from "../../data/products.js" ;
 import{formatCurrency} from "../utils/money.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
@@ -46,8 +46,12 @@ export function renderOrderSummary(){
             <span>
                 Quantity: <span class="quantity-label">${cartItem.quantity}</span>
             </span>
-            <span class="update-quantity-link link-primary js-update-link" data-product-id="${matchinProduct.id}">
+            <input class="new-quantity-input link-primary js-input-link-${matchinProduct.id}" type="text" value="${cartItem.quantity} "></input>
+            <span class="update-quantity-link link-primary js-update-link"}">
                 Update
+            </span>
+            <span class="save-quantity-link link-primary js-save-link" data-product-id="${matchinProduct.id}">
+                Save
             </span>
             <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${matchinProduct.id}">
                 Delete
@@ -76,7 +80,33 @@ export function renderOrderSummary(){
         })
     })
 
+    document.querySelectorAll('.js-update-link').forEach((link)=>{
+        link.addEventListener('click',(event)=>{
+            const cartItemContainer = event.target.closest('.cart-item-container');
+                if (cartItemContainer) {
+                    // Thêm lớp "is-editing-quantity"
+                    cartItemContainer.classList.add('is-editing-quantity');
+                }
+        })
+    })
 
+    document.querySelectorAll('.js-save-link').forEach((link)=>{
+        link.addEventListener('click',(event)=>{
+            const productId = link.dataset.productId
+            console.log(productId)
+            const inputQuantity = document.querySelector(`.js-input-link-${productId}`);
+            const newQuantity = parseInt(inputQuantity.value, 10);
+            console.log(newQuantity)
+            updateCartQuantity(newQuantity,productId)
+            const cartItemContainer = event.target.closest('.cart-item-container');
+                if (cartItemContainer) {
+                    // loai lớp "is-editing-quantity"
+                    cartItemContainer.classList.remove('is-editing-quantity')
+                }
+                renderOrderSummary()
+                renderPaymentSummary()
+        })
+    })
 
     function deliveryOptionHTML(matchinProduct,cartItem){
         let html='';
