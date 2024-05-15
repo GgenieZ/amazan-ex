@@ -4,6 +4,7 @@ import{formatCurrency} from "../utils/money.js"
 import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
 import {deliveryOptions,getDeliveryOption} from "../../data/deliveryOption.js"
 import { renderPaymentSummary } from "./paymentSumary.js";
+import {updateCheckOut} from "../checkout.js"
 
 export function renderOrderSummary(){
     let cartSummaryHTML='';
@@ -77,6 +78,7 @@ export function renderOrderSummary(){
             const container=document.querySelector(`.js-cart-container-${productId}`)
             container.remove();
             renderPaymentSummary();
+            updateCheckOut();
         })
     })
 
@@ -93,10 +95,8 @@ export function renderOrderSummary(){
     document.querySelectorAll('.js-save-link').forEach((link)=>{
         link.addEventListener('click',(event)=>{
             const productId = link.dataset.productId
-            console.log(productId)
             const inputQuantity = document.querySelector(`.js-input-link-${productId}`);
             const newQuantity = parseInt(inputQuantity.value, 10);
-            console.log(newQuantity)
             updateCartQuantity(newQuantity,productId)
             const cartItemContainer = event.target.closest('.cart-item-container');
                 if (cartItemContainer) {
@@ -105,6 +105,7 @@ export function renderOrderSummary(){
                 }
                 renderOrderSummary()
                 renderPaymentSummary()
+                updateCheckOut();
         })
     })
 
@@ -156,6 +157,7 @@ export function renderOrderSummary(){
 updateDeliveryOption(productId,deliveryOptionId)
             renderOrderSummary();
             renderPaymentSummary();
+            
         })
     })
 }
