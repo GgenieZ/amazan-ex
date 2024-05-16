@@ -73,3 +73,10 @@ export function updateDeliveryOption (productId,deliveryOptionId){
 	matchinIitem.deliveryOptionId = deliveryOptionId;
 	saveToStorage();
 }
+export function updateCheckOut (){
+	let cartQuantity =0;
+		cart.forEach((cartItem)=>{
+		cartQuantity+=cartItem.quantity
+		})
+		document.querySelector('.js-return-home').innerHTML =`${cartQuantity} items`
+}

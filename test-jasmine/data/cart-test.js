@@ -1,4 +1,4 @@
-import {addToCart, cart,loadFromStorage, updateDeliveryOption} from "../../data/cart.js"
+import {addToCart, cart,loadFromStorage} from "../../data/cart.js"
 
 describe('test suite: formatCurrency',()=>{
     it('add an exiting products to the cart',()=>{
