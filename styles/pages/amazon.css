@@ -136,9 +136,10 @@
   color: rgb(6, 125, 98);
   font-size: 16px;
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   margin-bottom: 8px;
-
+  margin-top: -20px;
   /* At first, the "Added to cart" message will
      be invisible. Use JavaScript to change the
      opacity and make it visible. */
@@ -159,4 +160,17 @@
   width: 100%;
   padding: 8px;
   border-radius: 50px;
+}
+
+.size-chart{
+  display: inline-block;
+  font-style: italic;
+  text-decoration: none;
+  color: black;
+  z-index: 2;
+}
+
+.size-chart:hover{
+  opacity: 0.7;
+  text-decoration: underline;
 }

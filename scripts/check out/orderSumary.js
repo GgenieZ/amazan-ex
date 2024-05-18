@@ -48,7 +48,7 @@ export function renderOrderSummary(){
             <span>
                 Quantity: <span class="quantity-label">${cartItem.quantity}</span>
             </span>
-            <input class="new-quantity-input link-primary js-input-link-${matchinProduct.id}" type="text" value="${cartItem.quantity} "></input>
+            <input class="new-quantity-input link-primary js-input-link-${matchinProduct.id}" value="${cartItem.quantity}" type="number" min="1"></input>
             <span class="update-quantity-link link-primary js-update-link"}">
                 Update
             </span>
