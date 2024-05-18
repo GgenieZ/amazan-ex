@@ -1,9 +1,9 @@
 import{cart,addToCart,}from '../data/cart.js'
-import{products,loadProduct}from '../data/products.js'
+import{products,loadProductFetch}from '../data/products.js'
 import {displayAddedMess} from '../scripts/utils/appear-effect.js'
 let productHTML ='';
 
-loadProduct(renderProductsGrid)
+loadProductFetch(renderProductsGrid)
 
 function renderProductsGrid(){
 updateCartquantity();

@@ -67,12 +67,11 @@ products=productData.map((productDetials)=>{
       }
       return new Product(productDetials)
     });
-    console.log('laod products')
 })
 return promise;
 }
 loadProductFetch().then(()=>{
-  console.log('next')
+  console.log('load products')
 })
 
 /*export function loadProduct(fun){
