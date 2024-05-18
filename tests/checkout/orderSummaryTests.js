@@ -1,6 +1,6 @@
 import {renderOrderSummary} from "../../scripts/check out/orderSumary.js"
 import { cart,loadFromStorage} from "../../data/cart.js"
-import { loadProduct } from "../../data/products.js"
+import {loadProductFetch } from "../../data/products.js"
 
 describe('test suite: renderOrederSummary', ()=>
 {
@@ -8,10 +8,9 @@ describe('test suite: renderOrederSummary', ()=>
         const productId2 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6'
 
     beforeAll((done)=>{
-        loadProduct(()=>{
+        loadProductFetch().then(()=>{
             done();
         });
-        
     })
 
     beforeEach(()=>{

@@ -80,6 +80,8 @@ export function updateCheckOut (){
 		document.querySelector('.js-return-home').innerHTML =`${cartQuantity} items`
 }
 
+
+
 export function loadCart(fun){
 	const xhr = new XMLHttpRequest();
 	xhr.addEventListener('load',()=>

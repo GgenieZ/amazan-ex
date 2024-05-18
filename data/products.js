@@ -57,7 +57,25 @@ console.log(data.toLocaleTimeString())
 
 export let products =[]
 
-export function loadProduct(fun){
+export function loadProductFetch(){
+const promise = fetch(`http://supersimplebackend.dev/products`).then((response)=>{
+  return response.json()
+  }).then((productData)=>{
+products=productData.map((productDetials)=>{
+      if (productDetials.type==='clothing'){
+        return new Clothing(productDetials)
+      }
+      return new Product(productDetials)
+    });
+    console.log('laod products')
+})
+return promise;
+}
+loadProductFetch().then(()=>{
+  console.log('next')
+})
+
+/*export function loadProduct(fun){
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load',()=>
   {
@@ -73,7 +91,7 @@ export function loadProduct(fun){
   xhr.open('GET','http://supersimplebackend.dev/products')
   xhr.send();
   
-}
+}*/
 
 /*
 export const products = [
