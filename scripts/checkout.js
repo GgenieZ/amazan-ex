@@ -6,22 +6,25 @@ import { loadCart } from "../data/cart.js";
 //import '../data/cart-class.js'
 //import '../data/backend-pratice.js'
 
-new Promise((resolve)=>
-{
-    loadProduct(()=>{
-    resolve();
-   })
-}).then(()=>{
+Promise.all([
+    new Promise((resolve)=>
+    {
+        loadProduct(()=>{
+        resolve();
+       })
+    }),
     new Promise((resolve)=>{
         loadCart(()=>{
             resolve()
         })
     })
-}).then(()=>{
+]).then(()=>{
     updateCheckOut();
     renderOrderSummary();
     renderPaymentSummary();
 })
+
+
 
 /*loadProduct(()=>{
     updateCheckOut();
