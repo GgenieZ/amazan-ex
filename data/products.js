@@ -65,6 +65,7 @@ export function loadProduct(fun){
       }
       return new Product(productDetials)
     });
+    console.log('laod products')
     fun();
   })
   xhr.open('GET','http://supersimplebackend.dev/products')

@@ -23,20 +23,19 @@ function saveToStorage(){
 localStorage.setItem('cart',JSON.stringify(cart));
 }
 
-export function addToCart(productId){
+export function addToCart(productId,addQuantity){
 	let matchinIitem;
-
 	cart.forEach((cartItem)=>{
 		if(productId=== cartItem.productId){
 			matchinIitem =cartItem
 		}
 	})
 	if(matchinIitem){
-		matchinIitem.quantity+=1;
+		matchinIitem.quantity+=addQuantity;
 	}else{
 		cart.push({
 			productId,
-			quantity:1,
+			quantity:addQuantity,
 		})
 	}
 	saveToStorage()
@@ -80,3 +79,15 @@ export function updateCheckOut (){
 		})
 		document.querySelector('.js-return-home').innerHTML =`${cartQuantity} items`
 }
+
+export function loadCart(fun){
+	const xhr = new XMLHttpRequest();
+	xhr.addEventListener('load',()=>
+	{
+	  console.log('laod cart')
+	  fun();
+	})
+	xhr.open('GET','http://supersimplebackend.dev/cart')
+	xhr.send();
+	
+  }

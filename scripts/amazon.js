@@ -1,5 +1,6 @@
 import{cart,addToCart,}from '../data/cart.js'
 import{products,loadProduct}from '../data/products.js'
+import {displayAddedMess} from '../scripts/utils/appear-effect.js'
 let productHTML ='';
 
 loadProduct(renderProductsGrid)
@@ -33,7 +34,7 @@ products.forEach((products)=>{
 	</div>
 
 	<div class="product-quantity-container">
-		<select>
+		<select class="js-quantity-select-${products.id}">
 			<option selected value="1">1</option>
 			<option value="2">2</option>
 			<option value="3">3</option>
@@ -51,7 +52,7 @@ products.forEach((products)=>{
 
 	<div class="product-spacer"></div>
 
-	<div class="added-to-cart">
+	<div class="added-to-cart js-added-to-cart-${products.id}">
 		<img src="images/icons/checkmark.png">
 		Added
 	</div>
@@ -75,8 +76,12 @@ function updateCartquantity(){
 document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
 	button.addEventListener('click',()=>{
 		const productId = button.dataset.productId;
-		addToCart(productId);
+		displayAddedMess(productId);
+		let addQuantity=parseInt(document.querySelector(`.js-quantity-select-${productId}`).value,10);
+		console.log(addQuantity);
+		addToCart(productId,addQuantity);
 		updateCartquantity()
+		
 	})
 })
 }

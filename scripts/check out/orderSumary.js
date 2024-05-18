@@ -5,6 +5,7 @@ import dayjs from "https://unpkg.com/dayjs@1.11.10/esm/index.js"
 import {deliveryOptions,getDeliveryOption} from "../../data/deliveryOption.js"
 import { renderPaymentSummary } from "./paymentSumary.js";
 import {updateCheckOut} from "../../data/cart.js"
+import { displaySave,reDisplayUpdate } from "../utils/appear-effect.js";
 
 export function renderOrderSummary(){
     let cartSummaryHTML='';
@@ -84,11 +85,7 @@ export function renderOrderSummary(){
 
     document.querySelectorAll('.js-update-link').forEach((link)=>{
         link.addEventListener('click',(event)=>{
-            const cartItemContainer = event.target.closest('.cart-item-container');
-                if (cartItemContainer) {
-                    // Thêm lớp "is-editing-quantity"
-                    cartItemContainer.classList.add('is-editing-quantity');
-                }
+            displaySave(event)
         })
     })
 
@@ -98,11 +95,7 @@ export function renderOrderSummary(){
             const inputQuantity = document.querySelector(`.js-input-link-${productId}`);
             const newQuantity = parseInt(inputQuantity.value, 10);
             updateCartQuantity(newQuantity,productId)
-            const cartItemContainer = event.target.closest('.cart-item-container');
-                if (cartItemContainer) {
-                    // loai lớp "is-editing-quantity"
-                    cartItemContainer.classList.remove('is-editing-quantity')
-                }
+            reDisplayUpdate(event)
                 renderOrderSummary()
                 renderPaymentSummary()
                 updateCheckOut();
