@@ -1,10 +1,19 @@
 import {renderOrderSummary} from "../../scripts/check out/orderSumary.js"
 import { cart,loadFromStorage} from "../../data/cart.js"
+import { loadProduct } from "../../data/products.js"
 
 describe('test suite: renderOrederSummary', ()=>
 {
     const productId1 = '15b6fc6f-327a-4ec4-896f-486349e85a3d'
         const productId2 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6'
+
+    beforeAll((done)=>{
+        loadProduct(()=>{
+            done();
+        });
+        
+    })
+
     beforeEach(()=>{
         spyOn(localStorage,'setItem')
         document.querySelector('.js-test-container').innerHTML=`
