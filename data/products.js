@@ -67,14 +67,18 @@ products=productData.map((productDetials)=>{
       }
       return new Product(productDetials)
     });
+    console.log('load products')
+}).catch(()=>{
+  console.log('error')
 })
 return promise;
 }
 loadProductFetch().then(()=>{
-  console.log('load products')
+  
 })
 
-/*export function loadProduct(fun){
+
+export function loadProduct(fun){
   const xhr = new XMLHttpRequest();
   xhr.addEventListener('load',()=>
   {
@@ -87,10 +91,13 @@ loadProductFetch().then(()=>{
     console.log('laod products')
     fun();
   })
-  xhr.open('GET','http://supersimplebackend.dev/products')
+/*xhr.addEventListener('error',(error)=>{
+console.log('error')
+})  */;
+xhr.open('GET','http://supersimplebackend.dev/products')
   xhr.send();
   
-}*/
+}
 
 /*
 export const products = [

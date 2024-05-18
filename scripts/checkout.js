@@ -7,6 +7,7 @@ import { loadCart } from "../data/cart.js";
 //import '../data/backend-pratice.js'
 
 async function loadPage(){
+    try{
     console.log('load page')
     await loadProductFetch();
     await new Promise((resolve)=>{
@@ -14,6 +15,9 @@ async function loadPage(){
             resolve()
         })
     })
+}catch{
+    console.log('error')
+}
     updateCheckOut();
     renderOrderSummary();
     renderPaymentSummary();
