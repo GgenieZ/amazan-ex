@@ -9,8 +9,6 @@ export function getproduct(productId){
         })
         return matchinProduct;
 }
-
-
 class Product {
   id;
   image;
@@ -49,6 +47,11 @@ class Clothing extends Product {
   }
 }
 
+/*
+const data = new Date();
+console.log(data)
+console.log(data.toLocaleTimeString())
+*/
 
 export const products = [
   {
